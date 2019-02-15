@@ -1,0 +1,9 @@
+.day {
+  min-width: 408px;
+  flex-grow: 1;
+}
+
+.time-panel {
+  display: flex;
+  justify-content: center;
+}
