@@ -20,7 +20,6 @@ class App extends Component {
     if (!this.state) return null;
     const { city, weather } = this.state;
     const days = [];
-    console.log(this.state);
 
     for (const key of Object.keys(weather)) {
       const day = weather[key];
