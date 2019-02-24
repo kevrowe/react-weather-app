@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import Day from './components/Day';
-import { getWeather, getWeatherByDay } from './weather/client';
+import { getWeather } from './weather/client';
 import { getMonthName, getDayWithSuffix } from './utils/date';
+import { parseForecast } from './parse/weather';
 
 class App extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class App extends Component {
     getWeather('London, UK').then(data => {
       this.setState({
         city: data.city,
-        weather: getWeatherByDay(data.list),
+        weather: parseForecast(data.list),
       });
     });
   }
@@ -19,14 +20,14 @@ class App extends Component {
     if (!this.state) return null;
     const { city, weather } = this.state;
     const days = [];
+    console.log(this.state);
 
     for (const key of Object.keys(weather)) {
-      const data = weather[key];
-      const day = weather[key][Object.keys(weather[key])[0]];
-      const date = new Date(day.dt_txt);
+      const day = weather[key];
+      const date = new Date(day.date);
       const textDate = `${date.toDateString().split(' ')[0]} ${getDayWithSuffix(date)} ${getMonthName(date)}`;
 
-      days.push(<Day key={day.dt} date={textDate} data={data} />);
+      days.push(<Day key={day.id} date={textDate} hours={day.hours} />);
     }
 
     return (

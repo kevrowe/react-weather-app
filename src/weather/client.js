@@ -23,23 +23,11 @@ export const getWeather = async location => {
     return err;
   }
 
-  let [parseError, parsedData] = await result(data.json());
+  let [jsonError, weatherData] = await result(data.json());
 
-  if (parseError) {
-    return parseError;
+  if (jsonError) {
+    return jsonError;
   }
 
-  return parsedData;
-};
-
-export const getWeatherByDay = data => {
-  const response = {};
-
-  for (let entry of data) {
-    const [dateKey, timeKey] = entry.dt_txt.split(' ');
-
-    response[dateKey] = { ...response[dateKey], [timeKey]: entry };
-  }
-
-  return response;
+  return weatherData;
 };
