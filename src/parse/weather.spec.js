@@ -5,7 +5,10 @@ const mockHourInput = {
   dt: 1234567223,
   main: {
     temp: 12,
+    temp_min: 10,
+    temp_max: 12,
     humidity: 90,
+    pressure: 1000,
   },
   weather: [
     {
@@ -21,7 +24,7 @@ const mockForecastInput = [
   {
     ...mockHourInput,
     dt_txt: '2018-01-12 12:00:00',
-    main: { temp: 14, humidity: 80 },
+    main: { temp: 14, temp_min: 12, temp_max: 14, humidity: 80, pressure: 1000 },
   },
 ];
 
@@ -33,8 +36,13 @@ describe('Weather parser', () => {
       expect(result).toMatchObject({
         time: mockHourInput.dt_txt.split(' ')[1],
         timestamp: mockHourInput.dt,
-        temperature: mockHourInput.main.temp,
+        temperature: {
+          main: mockHourInput.main.temp,
+          min: mockHourInput.main.temp_min,
+          max: mockHourInput.main.temp_max,
+        },
         humidity: mockHourInput.main.humidity,
+        pressure: mockHourInput.main.pressure,
         icon: mockHourInput.weather[0].icon,
         description: mockHourInput.weather[0].description,
         wind: mockHourInput.wind,
@@ -52,7 +60,12 @@ describe('Weather parser', () => {
           {
             time: mockForecastInput[0].dt_txt.split(' ')[1],
             timestamp: mockForecastInput[0].dt,
-            temperature: mockForecastInput[0].main.temp,
+            temperature: {
+              main: mockForecastInput[0].main.temp,
+              min: mockForecastInput[0].main.temp_min,
+              max: mockForecastInput[0].main.temp_max,
+            },
+            pressure: mockForecastInput[0].main.pressure,
             humidity: mockForecastInput[0].main.humidity,
             icon: mockForecastInput[0].weather[0].icon,
             description: mockForecastInput[0].weather[0].description,
@@ -61,7 +74,12 @@ describe('Weather parser', () => {
           {
             time: mockForecastInput[1].dt_txt.split(' ')[1],
             timestamp: mockForecastInput[1].dt,
-            temperature: mockForecastInput[1].main.temp,
+            temperature: {
+              main: mockForecastInput[1].main.temp,
+              min: mockForecastInput[1].main.temp_min,
+              max: mockForecastInput[1].main.temp_max,
+            },
+            pressure: mockForecastInput[1].main.pressure,
             humidity: mockForecastInput[1].main.humidity,
             icon: mockForecastInput[1].weather[0].icon,
             description: mockForecastInput[1].weather[0].description,

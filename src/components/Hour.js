@@ -9,7 +9,7 @@ export default ({ data }) => {
     <div className="hour">
       <p>{time.replace(/:\d+$/, '')}</p>
       <WeatherIcon icon={icon} alt={description} title={description} />
-      <p>{parseInt(temperature)}&deg;</p>
+      <p>{parseInt(temperature.main)}&deg;</p>
     </div>
   );
 };

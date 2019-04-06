@@ -1,7 +1,12 @@
 export const parseHour = hour => ({
   time: hour.dt_txt.split(' ')[1],
   timestamp: hour.dt,
-  temperature: hour.main.temp,
+  temperature: {
+    main: hour.main.temp,
+    min: hour.main.temp_min,
+    max: hour.main.temp_max,
+  },
+  pressure: hour.main.pressure,
   humidity: hour.main.humidity,
   icon: hour.weather[0].icon,
   description: hour.weather[0].description,

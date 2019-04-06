@@ -10,7 +10,7 @@ const urls = {
 export const result = async promise => {
   try {
     const value = await promise;
-    return [, value];
+    return [undefined, value];
   } catch (e) {
     return [e];
   }
