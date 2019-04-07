@@ -23,7 +23,7 @@ class App extends Component {
     const { city, weather } = this.state;
     const days = [];
 
-    const average = getDaySummary(weather['2019-04-06']['hours']);
+    const average = getDaySummary(weather[new Date().toISOString().substr(0, 10)]['hours']);
 
     for (const key of Object.keys(weather)) {
       const day = weather[key];
@@ -36,7 +36,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Summary</h1>
-        <DaySummary {...average} date="6th April" />
+        <DaySummary {...average} date={`${getDayWithSuffix(new Date())} ${getMonthName(new Date())}`} />
         <h1>
           {city.name}, {city.country}
         </h1>
